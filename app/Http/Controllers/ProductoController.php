@@ -10,7 +10,7 @@ class ProductoController extends Controller
     public function index()
     {
         $productos = Producto::paginate();
-        return view('home', compact('productos'));
+        return view('producto', compact('productos'));
     }
     public function create()
     {
@@ -32,8 +32,24 @@ class ProductoController extends Controller
     {
         //
     }
+    /*
     public function destroy(Producto $producto)
     {
         //
+    }*/
+    public function destroy(Request $request, $id)
+    {
+        if ($request->ajax()) {
+
+            $producto = Producto::find($id);
+            $producto->delete();
+
+            $Productos_Total = Producto::all()->count();
+
+            return response()->json([
+                'total' => $Productos_Total,
+                'mensaje' => $producto->nombre . ' fue eliminado correctamente'
+            ]);
+        }
     }
 }
