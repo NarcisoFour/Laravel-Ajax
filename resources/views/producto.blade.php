@@ -6,7 +6,7 @@
 				<div class="panel-heading">Panel Administrativo</div>
 				<div class="panel-body">
 					<p>
-						<span id="ProductoTotal">{{ $productos->total() }}</span> Registros | página {{ $productos->currentPage() }} de {{ $productos->lastPage() }}
+						<span id="ProductoTotal" style="">{{ $productos->total() }}</span> Registros | página {{ $productos->currentPage() }} de {{ $productos->lastPage() }}
 					</p>
 					<div id="alert" class="alert alert-info">
 					</div>
@@ -24,9 +24,8 @@
 								<td width="20px">{{ $item->id }}</td>
 								<td>{{ $item->nombre }}</td>
 								<td width="20px">
-									{{--  'api/producto/{id}'  --}}
 									{!! Form::open(['url' => ['api/producto', $item->id], 'method' => 'delete']) !!}
-										<a href="#">Eliminar</a>
+										<a href="#" class="btn-delete">Eliminar</a>
 									{!! Form::close() !!}
 								</td>
 							</tr>
@@ -39,4 +38,7 @@
 		</div>
 	</div>
 </div>
+@endsection
+@section('script')
+<script src="{{ asset('js/script.js') }}"></script>
 @endsection
